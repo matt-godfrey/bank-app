@@ -3,16 +3,26 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
+
 
 using namespace std;
 
 class Account {
 	public:
-		Account(const string&, const string&);
+		Account(const string&, const string&, const string&);
+		
+		long getAcctNum();
+		const string& getTransit();
+		const string& getBranch();
+		const string& getBank();
+		void print();
 	
 	
 	protected:
-		int acctNum;
+		long acctNum;
+		string bank;
 		string transit;
 		string branch;
 		double balance;

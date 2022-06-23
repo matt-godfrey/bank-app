@@ -15,8 +15,14 @@ class Bank {
 		
 		bool addAccount(string type);
 		bool deposit(double amount);
-		bool addCustomer(string fname, string lname);
+		bool addCustomer(Customer*);
 		bool getCustomer(const string& first, const string& last, Customer**);
+		const string& getBranch();
+		const string& getTransit();
+		const string& getName();
+		int getNumCustomers();
+		void print();
+		void printCustomers();
 
 	
 	private:

@@ -1,5 +1,5 @@
-obj = main.o Bank.o Customer.o Account.o
-headers = Bank.h Customer.h Account.h
+obj = main.o Bank.o Customer.o Account.o Chequing.o Saving.o
+headers = Bank.h Customer.h Account.h Chequing.h Saving.h
 
 out: $(obj)
 	g++ $(obj) -o out
@@ -15,6 +15,12 @@ Customer.o: Customer.cc Customer.h
 	
 Account.o: Account.cc Account.h
 	g++ -c -g Account.cc
+	
+Chequing.o: Chequing.cc Chequing.h
+	g++ -c -g Chequing.cc
+	
+Saving.o: Saving.cc Saving.h
+	g++ -c -g Saving.cc
 
 
 clean:
