@@ -10,7 +10,9 @@ using namespace std;
 
 class Chequing:public Account {
 	public:
-		Chequing();
+		Chequing(const string& t, const string& b, const string& bank);
+	
+
 	
 	private:
 };

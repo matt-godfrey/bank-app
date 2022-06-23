@@ -10,7 +10,9 @@ using namespace std;
 
 class Saving:public Account {
 	public:
-		Saving();
+		Saving(const string& t, const string& b, const string& bank);
+	
+
 		
 		int getInterestRate();
 	
