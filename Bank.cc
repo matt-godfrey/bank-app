@@ -23,7 +23,15 @@ Bank::~Bank() {
 }
 
 
-bool Bank::addAccount(string type) {
+bool Bank::addAccount(Account *a) {
+	for (int i = 0; i < numAccounts; ++i) {
+		if (accounts[i]->getAcctNum() == a->getAcctNum()) {
+			a = NULL;
+			return false;
+		}
+	}
+	accounts[numAccounts] = a;
+	numAccounts++;
 	return true;
 }
 
@@ -50,8 +58,17 @@ bool Bank::addCustomer(Customer* c) {
 	numCustomers++;
 	return true;
 }
-bool Bank::getCustomer(const string& first, const string& last, Customer**) {
-	return true;
+bool Bank::getCustomer(const string& f, const string& l, Customer **c) {
+	for (int i = 0; i < numCustomers; ++i) {
+		if (customers[i]->getFirstName() == f) {
+			if (customers[i]->getLastName() == l) {
+				*c = customers[i];
+				return true;
+			}
+		}
+	}
+	*c = NULL;
+	return false;
 }
 
 const string& Bank::getBranch() {
@@ -73,6 +90,12 @@ int Bank::getNumCustomers() {
 void Bank::printCustomers() {
 	for (int i = 0; i < numCustomers; ++i)
 		customers[i]->print();
+}
+
+void Bank::printAccounts() {
+	for (int i = 0; i < numAccounts; ++i) {
+		accounts[i]->print();
+	}
 }
 
 void Bank::print() {

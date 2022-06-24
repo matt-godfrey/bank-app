@@ -6,6 +6,8 @@
 
 #include "Customer.h"
 #include "Account.h"
+#include "Chequing.h"
+#include "Saving.h"
 using namespace std;
 
 class Bank {
@@ -13,7 +15,7 @@ class Bank {
 		Bank(const string& n, const string& b, const string& t);
 		~Bank();
 		
-		bool addAccount(string type);
+		bool addAccount(Account*);
 		bool deposit(double amount);
 		bool addCustomer(Customer*);
 		bool getCustomer(const string& first, const string& last, Customer**);
@@ -23,6 +25,7 @@ class Bank {
 		int getNumCustomers();
 		void print();
 		void printCustomers();
+		void printAccounts();
 
 	
 	private:
