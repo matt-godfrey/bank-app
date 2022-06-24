@@ -10,7 +10,7 @@ using namespace std;
 
 class Saving:public Account {
 	public:
-		Saving(const string& t, const string& b, const string& bank);
+		Saving(const string& t, const string& b, const string& bank, float i);
 	
 
 		
