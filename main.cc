@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Bank.h"
 
-void printMenu(int *choice);
+void printMenu(int *choice, Customer*);
 void printAccountMenu(int *choice);
 
 int main() {
@@ -12,7 +12,7 @@ int main() {
 	Customer *curr = NULL;
 	
 	while (choice != 0) {
-		printMenu(&choice);
+		printMenu(&choice, curr);
 		if (choice == 0)
 			break;
 		
@@ -45,8 +45,9 @@ int main() {
 					string f;
 					string l;
 					long p;
-					Customer *c;
+					//Customer *c;
 					int choice = -1;
+					/*
 					cout << "Please enter the following information to open an account: " << endl << endl;;
 					cout << "First name: " << endl;
 					cin >> f;
@@ -56,56 +57,71 @@ int main() {
 					cin >> p;
 					if (rbc.getCustomer(f, l, &c)) {
 						if (c->getPin() == p) {
-							while (choice != 0) {
-								printAccountMenu(&choice);
-								if (choice == 0)
+						*/
+					if (curr == NULL) {
+						cout << "You must login to open an account" << endl;
+						break;
+					}
+						
+					while (choice != 0) {
+						printAccountMenu(&choice);
+						if (choice == 0)
+							break;
+						
+						switch(choice) {
+							case 1:
+								 {
+								 	string n = curr->getFirstName() + " " + curr->getLastName();
+								 	Chequing *a = new Chequing(rbc.getTransit(), rbc.getBranch(), rbc.getName(), n);
+								 	if (rbc.addAccount(a)) {
+								 		cout << "Chequing account created successfully!" << endl << endl;
+										a->print();
+										choice = 0;
+								 	}
+								 	
 									break;
+								 }
 								
-								switch(choice) {
-									case 1:
-										 {
-										 	Chequing *a = new Chequing(rbc.getTransit(), rbc.getBranch(), rbc.getName());
-										 	if (rbc.addAccount(a)) {
-										 		cout << "Chequing account created successfully!" << endl << endl;
-												a->print();
-												choice = 0;
-										 	}
-										 	
-											break;
-										 }
-										
-									case 2:
-										{
-											Saving *a = new Saving(rbc.getTransit(), rbc.getBranch(), rbc.getName(), 0.05);
-											if (rbc.addAccount(a)) {
-										 		cout << "Saving account created successfully!" << endl << endl;
-												a->print();
-												choice = 0;
-										 	}
-											break;
-										}
-										
-									default:
-										cout << "Please enter a valid selection" << endl;
-										break;
+							case 2:
+								{
+									string n = curr->getFirstName() + " " + curr->getLastName();
+									Saving *a = new Saving(rbc.getTransit(), rbc.getBranch(), rbc.getName(), n, 0.05);
+									if (rbc.addAccount(a)) {
+								 		cout << "Saving account created successfully!" << endl << endl;
+										a->print();
+										choice = 0;
+								 	}
+									break;
 								}
-							}
+								
+							default:
+								cout << "Please enter a valid selection" << endl;
+								break;
+						}
+					}
+						/*
 						}
 						else
 							cout << "incorrect pin" << endl;
 					}
 					else
 						cout << "Customer not found" << endl;
+				
+				*/
 				}
 			
 				break;
 			case 3:
 				{
+					if (curr != NULL) {
+						curr = NULL;
+						break;
+					}
 					string f;
 					string l;
 					long p;
 					int attempts = 2;
-					cout << "Please enter the following information to open an account: " << endl << endl;;
+					cout << "Please enter the following information: " << endl << endl;;
 					cout << "First name: " << endl;
 					cin >> f;
 					cout << "Last name: " << endl;
@@ -146,10 +162,22 @@ int main() {
 						cout << "Please login first" << endl;
 						break;
 					}
-					float amount;
+					double amount;
 				
 					cout << "Please enter the amount you want to deposit:" << endl;
 					cin >> amount;
+					if (amount < 0) {
+						cout << "Please enter a valid amount" << endl;
+						break;
+					}
+					long num;
+					cout << "Enter your account #: " << endl;
+					cin >> num;
+					if (rbc.deposit(num, amount) == false) {
+						cout << "ERROR: Wrong account number" << endl;
+						break;
+					}
+					cout << "Successfully deposited " << amount << " into account " << num << endl;
 			
 				break;
 				}
@@ -195,16 +223,25 @@ void printAccountMenu(int* choice) {
 	
 }
 
-void printMenu(int *choice) {
+void printMenu(int *choice, Customer *current) {
 	
 	int c = -1;
 	int numOptions = 7;
 	string str;
+	
+	if (current == NULL)
+		str = "NONE";
+	else
+		str = current->getFirstName() + " " + current->getLastName();
+	cout << "CURRENTLY LOGGED IN AS: " << str << endl << endl;
 
 	cout << "\nBank Menu" << endl;
 	cout << "  (1) Register"<< endl;
 	cout << "  (2) Open an Account (Note: must be a registered customer)"<< endl;
-	cout << "  (3) Login" << endl;
+	if (current == NULL)
+		cout << "  (3) Login" << endl;
+	else
+		cout << "  (3) Logout" << endl;
 	cout << "  (4) Deposit"<< endl;
 	cout << "  (5) Withdraw"<< endl;
 	cout << "  (6) Print Accounts"<< endl;

@@ -11,12 +11,14 @@ using namespace std;
 
 class Account {
 	public:
-		Account(const string&, const string&, const string&);
+		Account(const string&, const string&, const string&, const string&);
 		
 		long getAcctNum();
 		const string& getTransit();
 		const string& getBranch();
 		const string& getBank();
+		const string& getOwner();
+		bool deposit(double);
 		void print();
 	
 	
@@ -25,6 +27,7 @@ class Account {
 		string bank;
 		string transit;
 		string branch;
+		string owner;
 		double balance;
 		int numTransactions;
 };

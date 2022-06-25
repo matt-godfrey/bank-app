@@ -16,7 +16,7 @@ class Bank {
 		~Bank();
 		
 		bool addAccount(Account*);
-		bool deposit(double amount);
+		bool deposit(long acctNum, double amount);
 		bool addCustomer(Customer*);
 		bool getCustomer(const string& first, const string& last, Customer**);
 		const string& getBranch();
@@ -26,6 +26,7 @@ class Bank {
 		void print();
 		void printCustomers();
 		void printAccounts();
+		void printCustomerAccounts(Customer*);
 
 	
 	private:

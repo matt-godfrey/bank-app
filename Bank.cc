@@ -35,9 +35,15 @@ bool Bank::addAccount(Account *a) {
 	return true;
 }
 
-bool Bank::deposit(double amount) {
+bool Bank::deposit(long acctNum, double amount) {
+	for (int i = 0; i < numAccounts; ++i) {
+		if (accounts[i]->getAcctNum() == acctNum) {
+			accounts[i]->deposit(amount);
+			return true;
+		}
+	}
 	
-	return true;
+	return false;
 }
 bool Bank::addCustomer(Customer* c) {
 	if (numCustomers >= MAX_ARR)
@@ -95,6 +101,14 @@ void Bank::printCustomers() {
 void Bank::printAccounts() {
 	for (int i = 0; i < numAccounts; ++i) {
 		accounts[i]->print();
+	}
+}
+
+void Bank::printCustomerAccounts(Customer *c) {
+	string n = c->getFirstName() + " " + c->getLastName();
+	for (int i = 0; i < numAccounts; ++i) {
+		if (accounts[i]->getOwner() == n)
+			accounts[i]->print();
 	}
 }
 
