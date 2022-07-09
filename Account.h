@@ -18,7 +18,9 @@ class Account {
 		const string& getBranch();
 		const string& getBank();
 		const string& getOwner();
+		double getBalance();
 		bool deposit(double);
+		bool withdraw(double);
 		void print();
 	
 	

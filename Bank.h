@@ -17,6 +17,7 @@ class Bank {
 		
 		bool addAccount(Account*);
 		bool deposit(long acctNum, double amount);
+		bool withdraw(long acctNum, double amount);
 		bool addCustomer(Customer*);
 		bool getCustomer(const string& first, const string& last, Customer**);
 		const string& getBranch();

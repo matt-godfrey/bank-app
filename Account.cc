@@ -34,11 +34,31 @@ const string& Account::getOwner() {
 	return owner;
 }
 
+double Account::getBalance() {
+	return balance;
+}
+
 bool Account::deposit(double a) {
 	if (a < 0) return false;
 	
 	balance += a;
-	transactions++;
+	numTransactions++;
+	return true;
+}
+
+bool Account::withdraw(double a) {
+	if (a <= 0) {
+		cout << "Please enter an amount greater than 0" << endl;
+		return false;
+	}
+		
+	if (a > balance) {
+		cout << "Not enough funds in account" << endl;
+		return false;
+	}
+		
+	balance -= a;
+	numTransactions++;
 	return true;
 }
 

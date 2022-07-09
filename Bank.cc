@@ -45,6 +45,18 @@ bool Bank::deposit(long acctNum, double amount) {
 	
 	return false;
 }
+
+
+bool Bank::withdraw(long acctNum, double amount) {
+	for (int i = 0; i < numAccounts; ++i) {
+		if (accounts[i]->getAcctNum() == acctNum) {
+			if (accounts[i]->withdraw(amount))
+				return true;
+		}
+	}
+	return false;
+}
+
 bool Bank::addCustomer(Customer* c) {
 	if (numCustomers >= MAX_ARR)
 		return false;

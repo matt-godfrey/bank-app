@@ -183,6 +183,28 @@ int main() {
 				}
 				
 			case 5:
+				{
+					if (curr == NULL) {
+						cout << "Please login first" << endl;
+						break;
+					}
+					double amount;
+				
+					cout << "Please enter the amount you want to withdraw:" << endl;
+					cin >> amount;
+					if (amount < 0) {
+						cout << "Please enter a valid amount" << endl;
+						break;
+					}
+					long num;
+					cout << "Enter your account #: " << endl;
+					cin >> num;
+					if (rbc.withdraw(num, amount) == false) {
+						break;
+					}
+					cout << "Successfully withdrawn " << amount << " out of account " << num << endl;
+				
+				}
 			
 				break;
 			default:
