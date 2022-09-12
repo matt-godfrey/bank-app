@@ -15,6 +15,8 @@ class Customer {
 		const string& getEmail();
 		long getPin();
 		void print();
+		float getBalance();
+		void updateBalance(float amount);
 	
 	private:
 		int id;
@@ -22,6 +24,7 @@ class Customer {
 		string last;
 		string email;
 		long pin;
+		float balance;
 };
 
 #endif

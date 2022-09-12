@@ -5,19 +5,19 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-
+#include "Customer.h"
 
 using namespace std;
 
 class Account {
 	public:
-		Account(const string&, const string&, const string&, const string&);
+		Account(const string&, const string&, const string&, Customer*);
 		
 		long getAcctNum();
 		const string& getTransit();
 		const string& getBranch();
 		const string& getBank();
-		const string& getOwner();
+		Customer* getOwner();
 		double getBalance();
 		bool deposit(double);
 		bool withdraw(double);
@@ -29,7 +29,7 @@ class Account {
 		string bank;
 		string transit;
 		string branch;
-		string owner;
+		Customer* owner;
 		double balance;
 		int numTransactions;
 };

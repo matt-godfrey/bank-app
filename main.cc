@@ -72,7 +72,7 @@ int main() {
 							case 1:
 								 {
 								 	string n = curr->getFirstName() + " " + curr->getLastName();
-								 	Chequing *a = new Chequing(rbc.getTransit(), rbc.getBranch(), rbc.getName(), n);
+								 	Chequing *a = new Chequing(rbc.getTransit(), rbc.getBranch(), rbc.getName(), curr);
 								 	if (rbc.addAccount(a)) {
 								 		cout << "Chequing account created successfully!" << endl << endl;
 										a->print();
@@ -85,7 +85,7 @@ int main() {
 							case 2:
 								{
 									string n = curr->getFirstName() + " " + curr->getLastName();
-									Saving *a = new Saving(rbc.getTransit(), rbc.getBranch(), rbc.getName(), n, 0.05);
+									Saving *a = new Saving(rbc.getTransit(), rbc.getBranch(), rbc.getName(), curr, 0.05);
 									if (rbc.addAccount(a)) {
 								 		cout << "Saving account created successfully!" << endl << endl;
 										a->print();
@@ -255,7 +255,15 @@ void printMenu(int *choice, Customer *current) {
 		str = "NONE";
 	else
 		str = current->getFirstName() + " " + current->getLastName();
-	cout << "CURRENTLY LOGGED IN AS: " << str << endl << endl;
+	cout << " -------------------------------------------------" << endl;
+	printf("%-15s %s %18s\n", "| CURRENTLY LOGGED IN AS: ", str.c_str(), "|");
+	cout << " -------------------------------------------------" << endl;
+	cout << " -------------------------------------------------" << endl;
+	float currBal = 0;
+	if (current != NULL)
+		currBal = current->getBalance();
+	printf("%-15s %f %25s\n", "| Balance: ", currBal, "|");
+	cout << "--------------------------------------------------" << endl;
 
 	cout << "\nBank Menu" << endl;
 	cout << "  (1) Register"<< endl;

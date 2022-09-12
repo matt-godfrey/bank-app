@@ -1,14 +1,14 @@
 #include "Account.h"
 
 
-Account::Account(const string& t, const string& b, const string& bank, const string& n) {
+Account::Account(const string& t, const string& b, const string& bank, Customer* c) {
 	srand((unsigned)time(NULL));
 	this->bank = bank;
 	transit = t;
 	branch = b;
 	balance = 0;
 	numTransactions = 0;
-	owner = n;
+	owner = c;
 	// set random account num
 	long min = 1000000;
     long max = 99999999;
@@ -30,7 +30,7 @@ const string& Account::getBank() {
 	return bank;
 }
 
-const string& Account::getOwner() {
+Customer* Account::getOwner() {
 	return owner;
 }
 
@@ -42,6 +42,7 @@ bool Account::deposit(double a) {
 	if (a < 0) return false;
 	
 	balance += a;
+	owner->updateBalance(a);
 	numTransactions++;
 	return true;
 }
@@ -58,13 +59,14 @@ bool Account::withdraw(double a) {
 	}
 		
 	balance -= a;
+	owner->updateBalance(-a);
 	numTransactions++;
 	return true;
 }
 
 void Account::print() {
 	cout << "Bank: " << bank << " | ";
-	cout << "Owner: " << owner << " | ";
+	cout << "Owner: " << owner->getFirstName() << " | ";
 	cout << "Transit: " << transit << " | ";
 	cout << "Branch: " << branch << " | ";
 	cout << "Balance: " << balance << " | ";

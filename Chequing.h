@@ -5,12 +5,13 @@
 #include <string>
 #include "Account.h"
 #include "defs.h"
+#include "Customer.h"
 
 using namespace std;
 
 class Chequing:public Account {
 	public:
-		Chequing(const string& t, const string& b, const string& bank, const string& n);
+		Chequing(const string& t, const string& b, const string& bank, Customer* c);
 	
 
 	

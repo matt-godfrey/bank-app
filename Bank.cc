@@ -119,17 +119,19 @@ void Bank::printAccounts() {
 void Bank::printCustomerAccounts(Customer *c) {
 	string n = c->getFirstName() + " " + c->getLastName();
 	for (int i = 0; i < numAccounts; ++i) {
-		if (accounts[i]->getOwner() == n)
+		if (accounts[i]->getOwner()->getFirstName() == n)
 			accounts[i]->print();
 	}
 }
 
 void Bank::print() {
+	int width = 10;
 	cout << "********* " << name << " Bank Info **********" << endl;
-	cout << "Accounts: " << numAccounts << endl;
-	cout << "Customers: " << numCustomers << endl;
-	cout << "Branch: " << branch << endl;
-	cout << "Transit: " << transit << endl;
+	/*cout << "Accounts: " << left << setw(width) << numAccounts << endl;*/
+	printf("%-15s %d\n", "Accounts: ", numAccounts);
+	printf("%-15s %d\n", "Customers: ", numCustomers);
+	printf("%-15s %s\n", "Branch: ", branch.c_str());
+	printf("%-15s %s\n", "Transit: ", transit.c_str());
 	cout << "**********************************" << endl;
 }
 
